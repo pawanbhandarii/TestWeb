@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine?</title>
+    <title>Hello Penguuu 💘</title>
+
     <style>
         * {
             margin: 0;
@@ -19,48 +20,51 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: radial-gradient(circle at 10% 10%, #fff0f6 0%, transparent 20%),
-                        linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #f6b8c8 100%);
+            background:
+                radial-gradient(circle at 10% 10%, #fff0f6 0%, transparent 20%),
+                linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #f6b8c8 100%);
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .container {
-            text-align: center;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
-            position: relative;
             width: 95vw;
             height: 90vh;
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-start;
-            align-items: center;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.12);
+            position: relative;
             overflow: hidden;
+        }
+
+        /* ---------- Screens ---------- */
+
+        .screen {
+            position: absolute;
+            inset: 0;
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .screen.active {
+            display: flex;
         }
 
         h1 {
             color: #7a1648;
-            margin-top: 40px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             font-size: 3em;
-            letter-spacing: 1px;
         }
 
         .sub {
             color: #a02a5a;
-            margin-bottom: 24px;
             font-size: 1.25em;
-        }
-
-        .button-container {
-            position: relative;
-            width: 100%;
-            height: 60%;
-            max-height: 520px;
+            margin-bottom: 30px;
         }
 
         button {
@@ -72,10 +76,44 @@
             font-weight: 700;
         }
 
-        #yes-btn {
-            background: linear-gradient(90deg,#ff6b9f 0%,#ff3d81 100%);
+        /* ---------- Intro ---------- */
+
+        #next-btn {
+            background: linear-gradient(90deg,#ff6b9f,#ff3d81);
             color: white;
-            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .intro-penguin {
+            margin-bottom: 20px;
+        }
+
+        /* Penguin wave */
+        #wing {
+            transform-origin: 70% 10%;
+            transform-box: fill-box;
+            animation: wave 1.2s ease-in-out infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: rotate(0deg); }
+            20% { transform: rotate(-28deg); }
+            40% { transform: rotate(0deg); }
+            60% { transform: rotate(-18deg); }
+            100% { transform: rotate(0deg); }
+        }
+
+        /* ---------- Question ---------- */
+
+        .button-container {
+            position: relative;
+            width: 100%;
+            height: 60%;
+            max-height: 520px;
+        }
+
+        #yes-btn {
+            background: linear-gradient(90deg,#ff6b9f,#ff3d81);
+            color: white;
             position: absolute;
             left: 50%;
             top: 50%;
@@ -84,7 +122,7 @@
 
         #yes-btn:hover {
             transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 8px 30px rgba(255, 77, 129, 0.35);
+            box-shadow: 0 8px 30px rgba(255,77,129,0.35);
         }
 
         #no-btn {
@@ -96,7 +134,6 @@
 
         .celebration {
             display: none;
-            margin-top: 30px;
             font-size: 3.5em;
             position: absolute;
             top: 44%;
@@ -106,7 +143,6 @@
 
         .message {
             display: none;
-            margin-top: 20px;
             font-size: 1.8em;
             color: #ff4d81;
             font-weight: 700;
@@ -116,260 +152,141 @@
             transform: translate(-50%, -50%);
         }
 
-        /* Penguin styles */
-        .penguin {
-            position: absolute;
-            bottom: 22px;
-            right: 22px;
-            width: 160px;
-            height: auto;
-            pointer-events: none;
-        }
-
-        /* Waving wing animation targets the SVG group with id="wing" */
-        #wing {
-            transform-origin: 70% 10%;
-            transform-box: fill-box;
-            animation: wave 1200ms ease-in-out infinite;
-        }
-
-        @keyframes wave {
-            0% { transform: rotate(0deg); }
-            20% { transform: rotate(-28deg); }
-            40% { transform: rotate(0deg); }
-            60% { transform: rotate(-18deg); }
-            80% { transform: rotate(0deg); }
-            100% { transform: rotate(0deg); }
-        }
+        /* ---------- Hearts ---------- */
 
         .heart {
             position: absolute;
             font-size: 1.4rem;
             pointer-events: none;
-            user-select: none;
             opacity: 0.95;
-            transform: translateY(0);
-            animation: floatUp 1400ms ease-out forwards;
+            animation: floatUp 1.4s ease-out forwards;
         }
 
         @keyframes floatUp {
-            0% { transform: translateY(0) scale(1); opacity: 1; }
-            100% { transform: translateY(-80px) scale(1.25); opacity: 0; }
+            from { transform: translateY(0) scale(1); opacity: 1; }
+            to { transform: translateY(-80px) scale(1.25); opacity: 0; }
         }
     </style>
 </head>
+
 <body>
-    <div class="container">
-        <h1> Hello Penguuu, will you be my Valentine? 💘</h1>
-        <div class="sub">I promise not so warm cuddles and chiso hot chocolate.</div>
+
+<div class="container">
+
+    <!-- INTRO SCREEN -->
+    <div class="screen intro active">
+        <div class="intro-penguin">
+            <svg viewBox="0 0 200 200" width="220" height="220">
+                <ellipse cx="100" cy="115" rx="52" ry="70" fill="#1b1b1b"/>
+                <ellipse cx="100" cy="120" rx="36" ry="50" fill="#fff"/>
+                <path d="M58 120 C30 110 40 150 70 150" fill="#1b1b1b"/>
+                <g id="wing">
+                    <path d="M142 120 C170 110 160 150 130 150" fill="#1b1b1b"/>
+                </g>
+                <circle cx="100" cy="60" r="44" fill="#1b1b1b"/>
+                <ellipse cx="100" cy="68" rx="28" ry="30" fill="#fff"/>
+                <circle cx="88" cy="60" r="6"/>
+                <circle cx="112" cy="60" r="6"/>
+                <path d="M96 74 L104 74 L100 82 Z" fill="#ffbe4b"/>
+            </svg>
+        </div>
+
+        <h1>Hello Penguuu 👋</h1>
+        <div class="sub">I have something important to ask you…</div>
+        <button id="next-btn">Next 💌</button>
+    </div>
+
+    <!-- QUESTION SCREEN -->
+    <div class="screen question">
+        <h1>Will you be my Valentine? 💘</h1>
+        <div class="sub">I promise not-so-warm cuddles and chiso hot chocolate ☕</div>
+
         <div class="button-container">
             <button id="yes-btn">Yes, be mine 💖</button>
             <button id="no-btn">No</button>
-        </div>
-
-        <!-- Animated penguin -->
-        <div class="penguin" aria-hidden="true">
-            <svg viewBox="0 0 200 200" width="160" height="160" xmlns="http://www.w3.org/2000/svg">
-                <!-- body -->
-                <ellipse cx="100" cy="115" rx="52" ry="70" fill="#1b1b1b" />
-                <!-- belly -->
-                <ellipse cx="100" cy="120" rx="36" ry="50" fill="#fff" />
-                <!-- left wing (static) -->
-                <path d="M58 120 C30 110 40 150 70 150" fill="#1b1b1b" />
-                <!-- right wing (waving) -->
-                <g id="wing">
-                    <path d="M142 120 C170 110 160 150 130 150" fill="#1b1b1b" />
-                </g>
-                <!-- head -->
-                <circle cx="100" cy="60" r="44" fill="#1b1b1b" />
-                <ellipse cx="100" cy="68" rx="28" ry="30" fill="#fff" />
-                <!-- eyes -->
-                <circle cx="88" cy="60" r="6" fill="#000" />
-                <circle cx="112" cy="60" r="6" fill="#000" />
-                <!-- beak -->
-                <path d="M96 74 L104 74 L100 82 Z" fill="#ffbe4b" />
-            </svg>
         </div>
 
         <div class="celebration">❤️</div>
         <div class="message">Yayyyyy, UNO liyera aauxu ma! 💕</div>
     </div>
 
-    <script>
-        const noBtn = document.getElementById('no-btn');
-        const yesBtn = document.getElementById('yes-btn');
-        const celebration = document.querySelector('.celebration');
-        const message = document.querySelector('.message');
-        const container = document.querySelector('.container');
-        const buttonContainer = document.querySelector('.button-container');
+</div>
 
-        let isTracking = true;
-        let lastPosition = { x: 0, y: 0 };
+<script>
+    const intro = document.querySelector('.intro');
+    const question = document.querySelector('.question');
+    const nextBtn = document.getElementById('next-btn');
 
-        // Get actual viewport dimensions
-        function getViewportDimensions() {
-            return {
-                width: window.innerWidth,
-                height: window.innerHeight
-            };
+    const noBtn = document.getElementById('no-btn');
+    const yesBtn = document.getElementById('yes-btn');
+    const celebration = document.querySelector('.celebration');
+    const message = document.querySelector('.message');
+    const container = document.querySelector('.container');
+    const buttonContainer = document.querySelector('.button-container');
+
+    nextBtn.onclick = () => {
+        intro.classList.remove('active');
+        question.classList.add('active');
+        initNoButton();
+    };
+
+    let isTracking = true;
+    let mouseX = 0, mouseY = 0;
+
+    function initNoButton() {
+        const rect = buttonContainer.getBoundingClientRect();
+        noBtn.style.left = rect.width * 0.7 + 'px';
+        noBtn.style.top = rect.height * 0.35 + 'px';
+        requestAnimationFrame(trackMouse);
+    }
+
+    document.addEventListener('mousemove', e => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    function trackMouse() {
+        if (!isTracking) return;
+
+        const btn = noBtn.getBoundingClientRect();
+        const dx = btn.left + btn.width/2 - mouseX;
+        const dy = btn.top + btn.height/2 - mouseY;
+        const dist = Math.hypot(dx, dy);
+
+        if (dist < 150) {
+            const rect = buttonContainer.getBoundingClientRect();
+            noBtn.style.left = Math.random() * (rect.width - 100) + 'px';
+            noBtn.style.top = Math.random() * (rect.height - 50) + 'px';
         }
+        requestAnimationFrame(trackMouse);
+    }
 
-        // Function to move the No button away from cursor
-        function moveNoButton(cursorX, cursorY, isDirectHover = false) {
-            if (!isTracking) return;
+    function spawnHeart(x, y) {
+        const h = document.createElement('div');
+        h.className = 'heart';
+        h.textContent = '💖';
+        h.style.left = x + 'px';
+        h.style.top = y + 'px';
+        container.appendChild(h);
+        setTimeout(() => h.remove(), 1500);
+    }
 
-            const containerRect = buttonContainer.getBoundingClientRect();
-            const btnRect = noBtn.getBoundingClientRect();
-            
-            const btnWidth = btnRect.width;
-            const btnHeight = btnRect.height;
-            
-            // Calculate safe bounds with padding
-            const padding = 50;
-            const minX = padding;
-            const maxX = containerRect.width - btnWidth - padding;
-            const minY = padding;
-            const maxY = containerRect.height - btnHeight - padding;
-            
-            // Get current button center relative to button container
-            const btnCenterX = btnRect.left + btnRect.width / 2 - containerRect.left;
-            const btnCenterY = btnRect.top + btnRect.height / 2 - containerRect.top;
-            
-            // Calculate cursor position relative to button container
-            const relativeCursorX = cursorX - containerRect.left;
-            const relativeCursorY = cursorY - containerRect.top;
-            
-            // Calculate direction away from cursor
-            const deltaX = btnCenterX - relativeCursorX;
-            const deltaY = btnCenterY - relativeCursorY;
-            const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-            
-            if (distance === 0) return;
-            
-            // Normalize direction
-            const dirX = deltaX / distance;
-            const dirY = deltaY / distance;
-            
-            // Jump distance scales with container size
-            const jumpDistance = isDirectHover ? 
-                Math.min(containerRect.width, containerRect.height) * 0.4 : 
-                Math.min(containerRect.width, containerRect.height) * 0.3;
-            
-            let newX = btnCenterX + dirX * jumpDistance;
-            let newY = btnCenterY + dirY * jumpDistance;
-            
-            // Keep within bounds - teleport to opposite side if needed
-            if (newX < minX) newX = maxX - 50;
-            if (newX > maxX) newX = minX + 50;
-            if (newY < minY) newY = maxY - 50;
-            if (newY > maxY) newY = minY + 50;
-            
-            noBtn.style.left = newX + 'px';
-            noBtn.style.top = newY + 'px';
-            
-            lastPosition = { x: newX, y: newY };
+    yesBtn.onclick = () => {
+        isTracking = false;
+        yesBtn.style.display = 'none';
+        noBtn.style.display = 'none';
+        celebration.style.display = 'block';
+        message.style.display = 'block';
+
+        const rect = container.getBoundingClientRect();
+        for (let i = 0; i < 12; i++) {
+            spawnHeart(
+                rect.width / 2 + (Math.random() - 0.5) * 200,
+                rect.height / 2 + (Math.random() - 0.5) * 100
+            );
         }
+    };
+</script>
 
-        function isMouseOverButton(mouseX, mouseY, padding = 0) {
-            const btnRect = noBtn.getBoundingClientRect();
-            return mouseX >= btnRect.left - padding && 
-                   mouseX <= btnRect.right + padding &&
-                   mouseY >= btnRect.top - padding && 
-                   mouseY <= btnRect.bottom + padding;
-        }
-
-        // Use requestAnimationFrame for responsiveness
-        let animationFrameId;
-        let lastMouseX = 0;
-        let lastMouseY = 0;
-
-        function checkMousePosition() {
-            if (!isTracking) return;
-            
-            if (isMouseOverButton(lastMouseX, lastMouseY, 10)) {
-                moveNoButton(lastMouseX, lastMouseY, true);
-            } else {
-                const btnRect = noBtn.getBoundingClientRect();
-                const btnCenterX = btnRect.left + btnRect.width / 2;
-                const btnCenterY = btnRect.top + btnRect.height / 2;
-                const distance = Math.hypot(lastMouseX - btnCenterX, lastMouseY - btnCenterY);
-                const detectionRadius = Math.min(window.innerWidth, window.innerHeight) * 0.15;
-                if (distance < detectionRadius) {
-                    moveNoButton(lastMouseX, lastMouseY, false);
-                }
-            }
-            animationFrameId = requestAnimationFrame(checkMousePosition);
-        }
-
-        document.addEventListener('mousemove', (e) => {
-            lastMouseX = e.clientX;
-            lastMouseY = e.clientY;
-        });
-
-        checkMousePosition();
-
-        noBtn.addEventListener('mouseenter', (e) => {
-            if (isTracking) moveNoButton(e.clientX, e.clientY, true);
-        });
-
-        noBtn.addEventListener('mouseover', (e) => {
-            if (isTracking) moveNoButton(e.clientX, e.clientY, true);
-        });
-
-        // Helper to spawn a floating heart
-        function spawnHeart(x, y) {
-            const heart = document.createElement('div');
-            heart.className = 'heart';
-            heart.style.left = x + 'px';
-            heart.style.top = y + 'px';
-            heart.textContent = '💖';
-            container.appendChild(heart);
-            // Remove after animation
-            setTimeout(() => heart.remove(), 1600);
-        }
-
-        // Yes button click - celebrate with hearts
-        yesBtn.addEventListener('click', () => {
-            isTracking = false;
-            cancelAnimationFrame(animationFrameId);
-            celebration.style.display = 'block';
-            message.style.display = 'block';
-            noBtn.style.display = 'none';
-            yesBtn.style.display = 'none';
-
-            // spawn a burst of hearts near center
-            const rect = container.getBoundingClientRect();
-            for (let i = 0; i < 10; i++) {
-                const x = rect.width * 0.5 + (Math.random() - 0.5) * 200;
-                const y = rect.height * 0.45 + (Math.random() - 0.5) * 80;
-                spawnHeart(x, y);
-            }
-        });
-
-        // Prevent no button click
-        noBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            moveNoButton(e.clientX, e.clientY, true);
-        });
-
-        noBtn.addEventListener('mousedown', (e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            moveNoButton(e.clientX, e.clientY, true);
-        });
-
-        // Initialize position
-        setTimeout(() => {
-            const containerRect = buttonContainer.getBoundingClientRect();
-            noBtn.style.left = (containerRect.width * 0.72) + 'px';
-            noBtn.style.top = (containerRect.height * 0.32) + 'px';
-        }, 100);
-
-        // Debug on resize
-        window.addEventListener('resize', () => {
-            // noop - kept for parity with original behavior
-        });
-    </script>
 </body>
 </html>
